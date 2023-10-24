@@ -1,0 +1,46 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Throat"
+						}
+					}
+				]
+			},
+			"bodyText": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Pariatur do id esse. Ipsum tempor incididunt Lorem duis excepteur nostrud do qui eu aliqua amet amet. Aute irure cillum labore velit occaecat officia laborum dolore sunt exercitation fugiat."
+						}
+					}
+				]
+			},
+			"statsNumber": {
+				"__TYPE__": "FieldContent",
+				"value": "2",
+				"type": "Number"
+			},
+			"statsUnit": {
+				"__TYPE__": "FieldContent",
+				"value": "organization",
+				"type": "Text"
+			},
+			"statsCaption": {
+				"__TYPE__": "FieldContent",
+				"value": "remove",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
