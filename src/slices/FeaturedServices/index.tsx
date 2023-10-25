@@ -22,7 +22,7 @@ const FeaturedServices = ({ slice }: FeaturedServicesProps): JSX.Element => {
       name="featured-services"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="lg:pb-16"
+      className="pb-6 lg:pb-16"
     >
       <Container size="wide">
         <SmartText text={heading} variant="h2" className="text-center uppercase mb-12 md:mb-16 lg:mb-20 xl:mb-32" />
