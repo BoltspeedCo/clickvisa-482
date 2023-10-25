@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type FlexiblePageDocumentDataSlicesSlice =
+  | CtaSlice
   | FeaturedServicesSlice
   | QuoteSlice
   | AdvantageSlice
@@ -266,6 +267,88 @@ export type AdvantageSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Cta → Primary*
+ */
+export interface CtaSliceDefaultPrimary {
+  /**
+   * pre heading field in *Cta → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta.primary.preHeading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  preHeading: prismic.RichTextField;
+
+  /**
+   * heading field in *Cta → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * body text field in *Cta → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta.primary.bodyText
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bodyText: prismic.RichTextField;
+
+  /**
+   * button text field in *Cta → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta.primary.buttonText
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  buttonText: prismic.KeyTextField;
+
+  /**
+   * button link field in *Cta → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta.primary.buttonLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttonLink: prismic.LinkField;
+}
+
+/**
+ * Default variation for Cta Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CtaSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Cta*
+ */
+type CtaSliceVariation = CtaSliceDefault;
+
+/**
+ * Cta Shared Slice
+ *
+ * - **API ID**: `cta`
+ * - **Description**: Cta
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSlice = prismic.SharedSlice<"cta", CtaSliceVariation>;
+
+/**
  * Primary content in *FeaturedServices → Primary*
  */
 export interface FeaturedServicesSliceDefaultPrimary {
@@ -516,6 +599,10 @@ declare module "@prismicio/client" {
       AdvantageSliceDefaultItem,
       AdvantageSliceVariation,
       AdvantageSliceDefault,
+      CtaSlice,
+      CtaSliceDefaultPrimary,
+      CtaSliceVariation,
+      CtaSliceDefault,
       FeaturedServicesSlice,
       FeaturedServicesSliceDefaultPrimary,
       FeaturedServicesSliceDefaultItem,

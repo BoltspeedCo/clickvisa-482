@@ -22,7 +22,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
     >
       {isFilled.image(image) ? (
         <Image src={image.url} alt={image.alt || ''} width={image.dimensions.width} height={image.dimensions.height}
-          className="w-full  h-[450px] lg:h-[680px] object-cover object-center"
+          className="w-full  h-[450px] lg:h-[680px] object-cover object-center "
         />
       ) : null}
     </Section>

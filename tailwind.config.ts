@@ -19,6 +19,10 @@ module.exports = {
       fontFamily: {
         body: ["Proxima Nova", "sans-serif"],
       },
+      backgroundImage: {
+        "radial-gradient-foreground":
+          "radial-gradient(94.71% 100.46% at 99.02% 100%, rgba(10, 10, 10, 0.00) 0%, #0A0A0A 100%); ",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
