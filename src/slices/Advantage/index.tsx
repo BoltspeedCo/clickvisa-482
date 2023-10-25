@@ -33,7 +33,7 @@ const Advantage = ({ slice }: AdvantageProps): JSX.Element => {
             const { advantageDescription, advantageHeading } = advantage
             return (
               <div className="col-span-1" key={index}>
-                <SmartText text={advantageHeading} variant="h3" size="h4" className="font-bold" />
+                <SmartText text={advantageHeading} variant="h3" size="h4" className="font-bold mb-3 lg:mb-5" />
                 <SmartText text={advantageDescription} variant="p" className="mb-0 lg:mb-0 text-justify" />
               </div>
             )

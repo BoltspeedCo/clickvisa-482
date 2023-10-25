@@ -119,7 +119,6 @@ export const SmartText = ({
   const filledText = isFilled.richText(text) ? text : null
   return (
     <PrismicRichText field={filledText} components={(type, node, content, children) => {
-      console.log("PORPS", props.size, content)
       switch (type) {
         case 'heading1': return <Typography variant={variant} {...props}>{children}</Typography>
         case 'heading2': return <Typography variant={variant} {...props}>{children}</Typography>
