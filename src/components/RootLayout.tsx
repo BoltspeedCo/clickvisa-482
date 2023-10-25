@@ -14,10 +14,10 @@ const RootLayout = ({ children }: ILayout) => {
     <>
       {/* <Header headerType={headerType} /> */}
       <header className="">
-        <Container className="py-2 lg:py-4">
+        <Container className="py-3 lg:py-6">
           <div className="flex justify-between items-center">
             <div className="">
-              <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" width={200} height={50} />
+              <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
             </div>
             <nav className="flex gap-4 ">
               <div className="">
