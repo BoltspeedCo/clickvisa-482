@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type FlexiblePageDocumentDataSlicesSlice =
+  | StepsSlice
   | CtaSlice
   | FeaturedServicesSlice
   | QuoteSlice
@@ -72,6 +73,86 @@ export type FlexiblePageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<FlexiblePageDocumentData>,
     "flexiblePage",
+    Lang
+  >;
+
+/**
+ * Item in *Global Sections → step items*
+ */
+export interface GlobalSectionsDocumentDataStepItemsItem {
+  /**
+   * heading field in *Global Sections → step items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.stepItems[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * description field in *Global Sections → step items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.stepItems[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Content for Global Sections documents
+ */
+interface GlobalSectionsDocumentData {
+  /**
+   * heading field in *Global Sections*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.footerHeading
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  footerHeading: prismic.RichTextField
+  /**
+   * steps Heading field in *Global Sections*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.stepsHeading
+   * - **Tab**: Steps
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */;
+  stepsHeading: prismic.RichTextField;
+
+  /**
+   * step items field in *Global Sections*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.stepItems[]
+   * - **Tab**: Steps
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  stepItems: prismic.GroupField<
+    Simplify<GlobalSectionsDocumentDataStepItemsItem>
+  >;
+}
+
+/**
+ * Global Sections document from Prismic
+ *
+ * - **API ID**: `globalSections`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GlobalSectionsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<GlobalSectionsDocumentData>,
+    "globalSections",
     Lang
   >;
 
@@ -174,7 +255,29 @@ export type ServiceDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = FlexiblePageDocument | ServiceDocument;
+interface SettingsDocumentData {}
+
+/**
+ * Settings document from Prismic
+ *
+ * - **API ID**: `settings`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SettingsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SettingsDocumentData>,
+    "settings",
+    Lang
+  >;
+
+export type AllDocumentTypes =
+  | FlexiblePageDocument
+  | GlobalSectionsDocument
+  | ServiceDocument
+  | SettingsDocument;
 
 /**
  * Primary content in *Advantage → Primary*
@@ -577,6 +680,86 @@ export type ServiceHeaderSlice = prismic.SharedSlice<
   ServiceHeaderSliceVariation
 >;
 
+/**
+ * Primary content in *Steps → Primary*
+ */
+export interface StepsSliceDefaultPrimary {
+  /**
+   * heading field in *Steps → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: steps.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Steps → Items*
+ */
+export interface StepsSliceDefaultItem {
+  /**
+   * step heading field in *Steps → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: steps.items[].stepHeading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  stepHeading: prismic.KeyTextField;
+
+  /**
+   * step description field in *Steps → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: steps.items[].stepDescription
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  stepDescription: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Steps Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StepsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<StepsSliceDefaultPrimary>,
+  Simplify<StepsSliceDefaultItem>
+>;
+
+/**
+ * Step Global variation for Steps Slice
+ *
+ * - **API ID**: `stepGlobal`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StepsSliceStepGlobal = prismic.SharedSliceVariation<
+  "stepGlobal",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Steps*
+ */
+type StepsSliceVariation = StepsSliceDefault | StepsSliceStepGlobal;
+
+/**
+ * Steps Shared Slice
+ *
+ * - **API ID**: `steps`
+ * - **Description**: Steps
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StepsSlice = prismic.SharedSlice<"steps", StepsSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -590,9 +773,14 @@ declare module "@prismicio/client" {
       FlexiblePageDocument,
       FlexiblePageDocumentData,
       FlexiblePageDocumentDataSlicesSlice,
+      GlobalSectionsDocument,
+      GlobalSectionsDocumentData,
+      GlobalSectionsDocumentDataStepItemsItem,
       ServiceDocument,
       ServiceDocumentData,
       ServiceDocumentDataSlicesSlice,
+      SettingsDocument,
+      SettingsDocumentData,
       AllDocumentTypes,
       AdvantageSlice,
       AdvantageSliceDefaultPrimary,
@@ -620,6 +808,12 @@ declare module "@prismicio/client" {
       ServiceHeaderSliceDefaultPrimary,
       ServiceHeaderSliceVariation,
       ServiceHeaderSliceDefault,
+      StepsSlice,
+      StepsSliceDefaultPrimary,
+      StepsSliceDefaultItem,
+      StepsSliceVariation,
+      StepsSliceDefault,
+      StepsSliceStepGlobal,
     };
   }
 }

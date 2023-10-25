@@ -1,0 +1,54 @@
+{
+  "id": "globalSections",
+  "label": "Global Sections",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Header": {},
+    "Footer": {
+      "footerHeading": {
+        "type": "StructuredText",
+        "config": {
+          "label": "heading",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading2,strong"
+        }
+      }
+    },
+    "Steps": {
+      "stepsHeading": {
+        "type": "StructuredText",
+        "config": {
+          "label": "steps Heading",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading2,strong"
+        }
+      },
+      "stepItems": {
+        "type": "Group",
+        "config": {
+          "label": "step items",
+          "fields": {
+            "heading": {
+              "type": "Text",
+              "config": {
+                "label": "heading",
+                "placeholder": ""
+              }
+            },
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "description",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

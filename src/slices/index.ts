@@ -9,4 +9,5 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   quote: dynamic(() => import("./Quote")),
   service_header: dynamic(() => import("./ServiceHeader")),
+  steps: dynamic(() => import("./Steps")),
 };

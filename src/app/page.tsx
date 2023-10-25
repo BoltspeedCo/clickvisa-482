@@ -8,10 +8,13 @@ export default async function Home() {
   const page = await client.getSingle('flexiblePage', {
     fetchLinks: ['service.name', 'service.featuredDescription', 'service.featuredIcon']
   })
+  const globalSections = await client.getSingle('globalSections')
   // console.log("page", page)
   return (
     <RootLayout>
-      <SliceZone slices={page.data.slices} components={components} />
+      <SliceZone slices={page.data.slices} components={components} context={{
+        globalSections: globalSections
+      }} />
     </RootLayout>
 
   )
