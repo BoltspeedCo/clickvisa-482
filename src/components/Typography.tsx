@@ -28,11 +28,11 @@ const typographyVariants = cva(
       'span': '',
     },
     size: {
-      'h1': 'text-4xl lg:text-5xl ',
-      'h2': 'text-3xl lg:text-4xl ',
-      'h3': 'text-2xl lg:text-3xl ',
-      'h4': 'text-xl lg:text-2xl ',
-      'h5': 'text-lg lg:text-xl ',
+      'h1': 'text-3xl lg:text-4xl ',
+      'h2': 'text-2xl lg:text-3xl ',
+      'h3': 'text-xl lg:text-2xl ',
+      'h4': 'text-lg lg:text-xl ',
+      'h5': 'text-md lg:text-lg ',
       'h6': 'text-sm lg:text-base ',
       'p': 'leading-relaxed ',
 
@@ -104,6 +104,8 @@ type SmartTextProps = {
   text: string | RichTextField | KeyTextField
   variant: TypographyVariants
 }
+
+
 export const SmartText = ({
   text,
   variant = 'p',
@@ -117,14 +119,15 @@ export const SmartText = ({
   const filledText = isFilled.richText(text) ? text : null
   return (
     <PrismicRichText field={filledText} components={(type, node, content, children) => {
+      console.log("PORPS", props.size, content)
       switch (type) {
-        case 'heading1': return <Typography variant='h1' {...props}>{children}</Typography>
-        case 'heading2': return <Typography variant='h2' {...props}>{children}</Typography>
-        case 'heading3': return <Typography variant='h3' {...props}>{children}</Typography>
-        case 'heading4': return <Typography variant='h4' {...props}>{children}</Typography>
-        case 'heading5': return <Typography variant='h5' {...props}>{children}</Typography>
-        case 'heading6': return <Typography variant='h6' {...props}>{children}</Typography>
-        case 'paragraph': return <Typography variant='p' {...props}>{children}</Typography>
+        case 'heading1': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'heading2': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'heading3': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'heading4': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'heading5': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'heading6': return <Typography variant={variant} {...props}>{children}</Typography>
+        case 'paragraph': return <Typography variant={variant} {...props}>{children}</Typography>
         case 'span': return <>{content}</>
       }
     }} />
