@@ -13,9 +13,10 @@ export default async function Pages({ params }: { params: { uid: string } }) {
     fetchLinks: ['service.name', 'service.featuredDescription', 'service.featuredIcon']
   }).catch(() => notFound())
   const globalSections = await client.getSingle('globalSections')
+  const settings = await client.getSingle('settings')
   // console.log("page", page)
   return (
-    <RootLayout globalContext={globalSections}>
+    <RootLayout settings={settings} globalContext={globalSections}>
       <SliceZone slices={page.data.slices} components={components} context={{
         globalSections: globalSections
       }} />

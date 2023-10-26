@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type FlexiblePageDocumentDataSlicesSlice =
+  | ServicesListsSlice
   | TeamListsSlice
   | TeamPartnersSlice
   | FeaturedListsSlice
@@ -258,7 +259,70 @@ export type ServiceDocument<Lang extends string = string> =
     Lang
   >;
 
-interface SettingsDocumentData {}
+type SettingsDocumentDataSlicesSlice = NavigationItemSlice;
+
+type SettingsDocumentDataSlices1Slice = FooterNavigationItemSlice;
+
+/**
+ * Item in *Settings → social*
+ */
+export interface SettingsDocumentDataSocialItem {
+  /**
+   * platform field in *Settings → social*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.social[].platform
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  platform: prismic.KeyTextField;
+
+  /**
+   * link field in *Settings → social*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.social[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Content for Settings documents
+ */
+interface SettingsDocumentData {
+  /**
+   * Slice Zone field in *Settings*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.slices[]
+   * - **Tab**: Header Menu
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice>
+  /**
+   * Slice Zone field in *Settings*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.slices1[]
+   * - **Tab**: Footer Menu
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */;
+  slices1: prismic.SliceZone<SettingsDocumentDataSlices1Slice>
+  /**
+   * social field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.social[]
+   * - **Tab**: Social
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  social: prismic.GroupField<Simplify<SettingsDocumentDataSocialItem>>;
+}
 
 /**
  * Settings document from Prismic
@@ -570,6 +634,76 @@ export type FeaturedServicesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *FooterNavigationItem → Primary*
+ */
+export interface FooterNavigationItemSliceDefaultPrimary {
+  /**
+   * group name field in *FooterNavigationItem → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_navigation_item.primary.group_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  group_name: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *FooterNavigationItem → Items*
+ */
+export interface FooterNavigationItemSliceDefaultItem {
+  /**
+   * menu text field in *FooterNavigationItem → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_navigation_item.items[].menuText
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  menuText: prismic.RichTextField;
+
+  /**
+   * menu link field in *FooterNavigationItem → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_navigation_item.items[].menuLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  menuLink: prismic.LinkField;
+}
+
+/**
+ * Default variation for FooterNavigationItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FooterNavigationItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FooterNavigationItemSliceDefaultPrimary>,
+  Simplify<FooterNavigationItemSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *FooterNavigationItem*
+ */
+type FooterNavigationItemSliceVariation = FooterNavigationItemSliceDefault;
+
+/**
+ * FooterNavigationItem Shared Slice
+ *
+ * - **API ID**: `footer_navigation_item`
+ * - **Description**: FooterNavigationItem
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FooterNavigationItemSlice = prismic.SharedSlice<
+  "footer_navigation_item",
+  FooterNavigationItemSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -610,6 +744,86 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *NavigationItem → Primary*
+ */
+export interface NavigationItemSliceDefaultPrimary {
+  /**
+   * name field in *NavigationItem → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.primary.name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * link field in *NavigationItem → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *NavigationItem → Items*
+ */
+export interface NavigationItemSliceDefaultItem {
+  /**
+   * child name field in *NavigationItem → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.items[].childName
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  childName: prismic.KeyTextField;
+
+  /**
+   * child link field in *NavigationItem → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.items[].childLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  childLink: prismic.LinkField;
+}
+
+/**
+ * Default variation for NavigationItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NavigationItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<NavigationItemSliceDefaultPrimary>,
+  Simplify<NavigationItemSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *NavigationItem*
+ */
+type NavigationItemSliceVariation = NavigationItemSliceDefault;
+
+/**
+ * NavigationItem Shared Slice
+ *
+ * - **API ID**: `navigation_item`
+ * - **Description**: NavigationItem
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NavigationItemSlice = prismic.SharedSlice<
+  "navigation_item",
+  NavigationItemSliceVariation
+>;
 
 /**
  * Primary content in *Quote → Primary*
@@ -736,6 +950,96 @@ type ServiceHeaderSliceVariation = ServiceHeaderSliceDefault;
 export type ServiceHeaderSlice = prismic.SharedSlice<
   "service_header",
   ServiceHeaderSliceVariation
+>;
+
+/**
+ * Primary content in *ServicesLists → Primary*
+ */
+export interface ServicesListsSliceDefaultPrimary {
+  /**
+   * heading field in *ServicesLists → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services_lists.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+}
+
+/**
+ * Primary content in *ServicesLists → Items*
+ */
+export interface ServicesListsSliceDefaultItem {
+  /**
+   * service field in *ServicesLists → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services_lists.items[].service
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  service: prismic.ContentRelationshipField<"service">;
+}
+
+/**
+ * Default variation for ServicesLists Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ServicesListsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ServicesListsSliceDefaultPrimary>,
+  Simplify<ServicesListsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ServicesLists*
+ */
+type ServicesListsSliceVariation = ServicesListsSliceDefault;
+
+/**
+ * ServicesLists Shared Slice
+ *
+ * - **API ID**: `services_lists`
+ * - **Description**: ServicesLists
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ServicesListsSlice = prismic.SharedSlice<
+  "services_lists",
+  ServicesListsSliceVariation
+>;
+
+/**
+ * Default variation for SimpleTextField Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SimpleTextFieldSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *SimpleTextField*
+ */
+type SimpleTextFieldSliceVariation = SimpleTextFieldSliceDefault;
+
+/**
+ * SimpleTextField Shared Slice
+ *
+ * - **API ID**: `simple_text_field`
+ * - **Description**: SimpleTextField
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SimpleTextFieldSlice = prismic.SharedSlice<
+  "simple_text_field",
+  SimpleTextFieldSliceVariation
 >;
 
 /**
@@ -1029,6 +1333,9 @@ declare module "@prismicio/client" {
       ServiceDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
+      SettingsDocumentDataSlicesSlice,
+      SettingsDocumentDataSlices1Slice,
+      SettingsDocumentDataSocialItem,
       AllDocumentTypes,
       AdvantageSlice,
       AdvantageSliceDefaultPrimary,
@@ -1048,10 +1355,20 @@ declare module "@prismicio/client" {
       FeaturedServicesSliceDefaultItem,
       FeaturedServicesSliceVariation,
       FeaturedServicesSliceDefault,
+      FooterNavigationItemSlice,
+      FooterNavigationItemSliceDefaultPrimary,
+      FooterNavigationItemSliceDefaultItem,
+      FooterNavigationItemSliceVariation,
+      FooterNavigationItemSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      NavigationItemSlice,
+      NavigationItemSliceDefaultPrimary,
+      NavigationItemSliceDefaultItem,
+      NavigationItemSliceVariation,
+      NavigationItemSliceDefault,
       QuoteSlice,
       QuoteSliceDefaultPrimary,
       QuoteSliceVariation,
@@ -1060,6 +1377,14 @@ declare module "@prismicio/client" {
       ServiceHeaderSliceDefaultPrimary,
       ServiceHeaderSliceVariation,
       ServiceHeaderSliceDefault,
+      ServicesListsSlice,
+      ServicesListsSliceDefaultPrimary,
+      ServicesListsSliceDefaultItem,
+      ServicesListsSliceVariation,
+      ServicesListsSliceDefault,
+      SimpleTextFieldSlice,
+      SimpleTextFieldSliceVariation,
+      SimpleTextFieldSliceDefault,
       StepsSlice,
       StepsSliceDefaultPrimary,
       StepsSliceDefaultItem,

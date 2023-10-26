@@ -21,7 +21,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       className="py-0 lg:py-0"
     >
       {isFilled.image(image) ? (
-        <Image src={image.url} alt={image.alt || ''} width={image.dimensions.width} height={image.dimensions.height}
+        <Image src={image.url} alt={image.alt || ''} priority width={image.dimensions.width} height={image.dimensions.height}
           className="w-full  h-[450px] lg:h-[680px] object-cover object-center "
         />
       ) : null}

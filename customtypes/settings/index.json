@@ -5,6 +5,57 @@
   "repeatable": false,
   "status": true,
   "json": {
-    "Main": {}
+    "Header Menu": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "navigation_item": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Footer Menu": {
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "footer_navigation_item": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Social": {
+      "social": {
+        "type": "Group",
+        "config": {
+          "label": "social",
+          "fields": {
+            "platform": {
+              "type": "Text",
+              "config": {
+                "label": "platform",
+                "placeholder": ""
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "link",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
