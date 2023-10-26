@@ -113,7 +113,7 @@
 
 @layer base {
   body {
-    @apply font-body font-light antialiased bg-white;
+    @apply font-body font-light  bg-white;
   }
 
   h1,

@@ -5,6 +5,9 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type FlexiblePageDocumentDataSlicesSlice =
+  | TeamListsSlice
+  | TeamPartnersSlice
+  | FeaturedListsSlice
   | StepsSlice
   | CtaSlice
   | FeaturedServicesSlice
@@ -452,6 +455,61 @@ type CtaSliceVariation = CtaSliceDefault;
 export type CtaSlice = prismic.SharedSlice<"cta", CtaSliceVariation>;
 
 /**
+ * Primary content in *FeaturedLists → Items*
+ */
+export interface FeaturedListsSliceDefaultItem {
+  /**
+   * heading field in *FeaturedLists → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_lists.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * description field in *FeaturedLists → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_lists.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for FeaturedLists Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedListsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<FeaturedListsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *FeaturedLists*
+ */
+type FeaturedListsSliceVariation = FeaturedListsSliceDefault;
+
+/**
+ * FeaturedLists Shared Slice
+ *
+ * - **API ID**: `featured_lists`
+ * - **Description**: FeaturedLists
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedListsSlice = prismic.SharedSlice<
+  "featured_lists",
+  FeaturedListsSliceVariation
+>;
+
+/**
  * Primary content in *FeaturedServices → Primary*
  */
 export interface FeaturedServicesSliceDefaultPrimary {
@@ -760,6 +818,196 @@ type StepsSliceVariation = StepsSliceDefault | StepsSliceStepGlobal;
  */
 export type StepsSlice = prismic.SharedSlice<"steps", StepsSliceVariation>;
 
+/**
+ * Primary content in *TeamLists → Primary*
+ */
+export interface TeamListsSliceDefaultPrimary {
+  /**
+   * heading field in *TeamLists → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_lists.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TeamLists → Items*
+ */
+export interface TeamListsSliceDefaultItem {
+  /**
+   * name field in *TeamLists → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_lists.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * title field in *TeamLists → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_lists.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * email field in *TeamLists → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_lists.items[].email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for TeamLists Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamListsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamListsSliceDefaultPrimary>,
+  Simplify<TeamListsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *TeamLists*
+ */
+type TeamListsSliceVariation = TeamListsSliceDefault;
+
+/**
+ * TeamLists Shared Slice
+ *
+ * - **API ID**: `team_lists`
+ * - **Description**: TeamLists
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamListsSlice = prismic.SharedSlice<
+  "team_lists",
+  TeamListsSliceVariation
+>;
+
+/**
+ * Primary content in *TeamPartners → Primary*
+ */
+export interface TeamPartnersSliceDefaultPrimary {
+  /**
+   * heading field in *TeamPartners → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TeamPartners → Items*
+ */
+export interface TeamPartnersSliceDefaultItem {
+  /**
+   * image field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * name field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  name: prismic.TitleField;
+
+  /**
+   * description field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * position field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].position
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  position: prismic.KeyTextField;
+
+  /**
+   * email field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email: prismic.KeyTextField;
+
+  /**
+   * phone field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].phone
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phone: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for TeamPartners Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamPartnersSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamPartnersSliceDefaultPrimary>,
+  Simplify<TeamPartnersSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *TeamPartners*
+ */
+type TeamPartnersSliceVariation = TeamPartnersSliceDefault;
+
+/**
+ * TeamPartners Shared Slice
+ *
+ * - **API ID**: `team_partners`
+ * - **Description**: TeamPartners
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamPartnersSlice = prismic.SharedSlice<
+  "team_partners",
+  TeamPartnersSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -791,6 +1039,10 @@ declare module "@prismicio/client" {
       CtaSliceDefaultPrimary,
       CtaSliceVariation,
       CtaSliceDefault,
+      FeaturedListsSlice,
+      FeaturedListsSliceDefaultItem,
+      FeaturedListsSliceVariation,
+      FeaturedListsSliceDefault,
       FeaturedServicesSlice,
       FeaturedServicesSliceDefaultPrimary,
       FeaturedServicesSliceDefaultItem,
@@ -814,6 +1066,16 @@ declare module "@prismicio/client" {
       StepsSliceVariation,
       StepsSliceDefault,
       StepsSliceStepGlobal,
+      TeamListsSlice,
+      TeamListsSliceDefaultPrimary,
+      TeamListsSliceDefaultItem,
+      TeamListsSliceVariation,
+      TeamListsSliceDefault,
+      TeamPartnersSlice,
+      TeamPartnersSliceDefaultPrimary,
+      TeamPartnersSliceDefaultItem,
+      TeamPartnersSliceVariation,
+      TeamPartnersSliceDefault,
     };
   }
 }

@@ -17,6 +17,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "team_lists": {
+              "type": "SharedSlice"
+            },
+            "team_partners": {
+              "type": "SharedSlice"
+            },
+            "featured_lists": {
+              "type": "SharedSlice"
+            },
             "steps": {
               "type": "SharedSlice"
             },

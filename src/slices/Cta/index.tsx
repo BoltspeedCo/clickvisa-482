@@ -21,13 +21,13 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Container size="wide" className="px-4">
-        <div className="bg-foreground relative overflow-hidden">
+      <Container size="wide" className="">
+        <div className=" bg-foreground relative overflow-hidden">
           <div className="absolute w-full md:w-2/3 lg:w-7/12 right-0 h-[150px] md:h-full bottom-0 md:top-0 overflow-hidden">
             <Image src={'/images/cta-bg.png'} alt={'cta-background'} className="left-0 w-full h-full object-right-center lg:object-right-center object-cover relative grayscale" width={1000} height={1000} />
 
           </div>
-          <div className="absolute w-full md:w-2/3 lg:w-7/12 h-[150px] md:h-full bottom-0 md:top-0 right-0 bg-radial-gradient-foreground">
+          <div className="absolute w-full md:w-2/3 lg:w-7/12 h-[150px] md:h-full bottom-0 md:top-0 right-0  bg-radial-gradient-foreground">
 
           </div>
           <div className="max-w-5xl mx-auto relative">

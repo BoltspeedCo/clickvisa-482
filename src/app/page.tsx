@@ -5,13 +5,13 @@ import RootLayout from '@/components/RootLayout';
 
 export default async function Home() {
   const client = createClient();
-  const page = await client.getSingle('flexiblePage', {
+  const page = await client.getByUID('flexiblePage', 'homepage', {
     fetchLinks: ['service.name', 'service.featuredDescription', 'service.featuredIcon']
   })
   const globalSections = await client.getSingle('globalSections')
   // console.log("page", page)
   return (
-    <RootLayout>
+    <RootLayout globalContext={globalSections}>
       <SliceZone slices={page.data.slices} components={components} context={{
         globalSections: globalSections
       }} />
