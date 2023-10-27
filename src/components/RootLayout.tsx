@@ -10,6 +10,7 @@ import { SmartText } from "./Typography";
 import { isFilled } from "@prismicio/client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { AnimatedLink, ButtonLink, buttonVariants } from "./ui/Button";
 interface ILayout {
   children: ReactNode;
   globalContext: GlobalSectionsDocument<string>
@@ -29,15 +30,25 @@ const RootLayout = ({ settings, globalContext, children }: ILayout) => {
             <div className="">
               <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
             </div>
-            <nav className="flex gap-4 ">
+            <nav className="flex gap-4 lg:gap-12 items-center">
               {headerMenu.map((menu, index) => {
-                const { link, name } = menu.primary
+                const { link, name, asButton } = menu.primary
                 return (
                   <div className="" key={index}>
                     {isFilled.link(link) && isFilled.keyText(name) ? (
-                      <Link href={link.url || ''} >
-                        {name}
-                      </Link>
+                      <>
+                        {
+                          asButton ? (
+                            <ButtonLink href={link.url || ''} variant={'fill'} size="sm" className="mx-2">
+                              {name}
+                            </ButtonLink>
+                          ) : (
+                            <AnimatedLink href={link.url || ''} >
+                              {name}
+                            </AnimatedLink>
+                          )
+                        }
+                      </>
                     ) : null}
                   </div>
                 )
@@ -93,7 +104,7 @@ const RootLayout = ({ settings, globalContext, children }: ILayout) => {
                 return (
                   <>
                     {isFilled.link(link) && isFilled.keyText(platform) ? (
-                      <Link href={link.url || ''} className="leading-none" >
+                      <Link href={link.url || ''} className="leading-none" key={index}>
                         <SmartText text={platform} variant="span" className="mb-0 text-sm underline lg:mb-0 uppercase" />
                       </Link>
                     ) : null}

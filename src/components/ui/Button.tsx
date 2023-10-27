@@ -4,6 +4,8 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { useAnimate, stagger, motion } from 'framer-motion'
 import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { type } from "os"
 
 const staggerMenuText = stagger(0.05, { startDelay: 0 })
 
@@ -28,7 +30,7 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
+        sm: "h-9  px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
       },
@@ -105,6 +107,113 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
+
+
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+type ButtonLinkProps = {} & React.ComponentPropsWithRef<typeof Link> & VariantProps<typeof buttonVariants>
+const ButtonLink = ({ children, variant, size, className, ...props }: ButtonLinkProps) => {
+  const [scope, animate] = useAnimate()
+
+  const childrenText = typeof children === "string" ? (
+    <span ref={scope} className="overflow-hidden block relative">
+      <span className="text-parent-top block ">
+        {children.split('').map((child, i) => {
+          return (
+            <span className="text-child-top inline-block min-w-[6px]" key={i}>{child}</span>
+          )
+        })}
+      </span>
+      <span ref={scope} className="text-parent block absolute -bottom-4 left-0 w-full">
+        {children.split('').map((child, i) => {
+          return (
+            <span className="text-child-bottom inline-block min-w-[6px]" key={i}>{child}</span>
+          )
+        })}
+      </span>
+    </span>
+  ) : children
+  return (
+    <Link {...props} className={cn(buttonVariants({ variant, size, className }))} onMouseEnter={() => {
+      animate('.text-child-top', {
+        y: -16,
+      }, {
+        delay: staggerMenuText
+      })
+      animate('.text-child-bottom', {
+        y: -16,
+      }, {
+        delay: staggerMenuText
+      })
+    }}
+      onMouseLeave={() => {
+        animate('.text-child-top', {
+          y: 0,
+        }, {
+          delay: staggerMenuText
+        })
+        animate('.text-child-bottom', {
+          y: 0,
+        }, {
+          delay: staggerMenuText
+        })
+      }}>
+      {childrenText}
+    </Link>
+  )
+}
+
+const AnimatedLink = React.forwardRef<HTMLAnchorElement, React.ComponentPropsWithRef<typeof Link>>((props, ref) => {
+  const { children, ...rest } = props
+  const [scope, animate] = useAnimate()
+
+  const childrenText = typeof children === "string" ? (
+    <span ref={scope} className="overflow-hidden block relative">
+      <span className="text-parent-top block ">
+        {children.split('').map((child, i) => {
+          return (
+            <span className="text-child-top inline-block min-w-[6px]" key={i}>{child}</span>
+          )
+        })}
+      </span>
+      <span ref={scope} className="text-parent block absolute -bottom-5 left-0 w-full">
+        {children.split('').map((child, i) => {
+          return (
+            <span className="text-child-bottom inline-block min-w-[6px]" key={i}>{child}</span>
+          )
+        })}
+      </span>
+    </span>
+  ) : children
+  return (
+    <Link {...rest} ref={ref} onMouseEnter={() => {
+      animate('.text-child-top', {
+        y: -20,
+      }, {
+        delay: staggerMenuText
+      })
+      animate('.text-child-bottom', {
+        y: -20,
+      }, {
+        delay: staggerMenuText
+      })
+    }}
+      onMouseLeave={() => {
+        animate('.text-child-top', {
+          y: 0,
+        }, {
+          delay: staggerMenuText
+        })
+        animate('.text-child-bottom', {
+          y: 0,
+        }, {
+          delay: staggerMenuText
+        })
+      }}>
+      {childrenText}
+    </Link>
+  )
+})
+AnimatedLink.displayName = "AnimatedLink"
+
+export { Button, buttonVariants, ButtonLink, AnimatedLink }

@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type FlexiblePageDocumentDataSlicesSlice =
+  | ContactInfoSlice
   | ServicesListsSlice
   | TeamListsSlice
   | TeamPartnersSlice
@@ -437,6 +438,96 @@ export type AdvantageSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ContactInfo → Primary*
+ */
+export interface ContactInfoSliceDefaultPrimary {
+  /**
+   * heading field in *ContactInfo → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * form heading field in *ContactInfo → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.primary.formHeading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  formHeading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ContactInfo → Items*
+ */
+export interface ContactInfoSliceDefaultItem {
+  /**
+   * heading field in *ContactInfo → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * text field in *ContactInfo → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.items[].text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * link field in *ContactInfo → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Default variation for ContactInfo Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactInfoSliceDefaultPrimary>,
+  Simplify<ContactInfoSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ContactInfo*
+ */
+type ContactInfoSliceVariation = ContactInfoSliceDefault;
+
+/**
+ * ContactInfo Shared Slice
+ *
+ * - **API ID**: `contact_info`
+ * - **Description**: ContactInfo
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactInfoSlice = prismic.SharedSlice<
+  "contact_info",
+  ContactInfoSliceVariation
+>;
+
+/**
  * Primary content in *Cta → Primary*
  */
 export interface CtaSliceDefaultPrimary {
@@ -768,6 +859,17 @@ export interface NavigationItemSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField;
+
+  /**
+   * as button field in *NavigationItem → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: navigation_item.primary.asButton
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  asButton: prismic.BooleanField;
 }
 
 /**
@@ -1342,6 +1444,11 @@ declare module "@prismicio/client" {
       AdvantageSliceDefaultItem,
       AdvantageSliceVariation,
       AdvantageSliceDefault,
+      ContactInfoSlice,
+      ContactInfoSliceDefaultPrimary,
+      ContactInfoSliceDefaultItem,
+      ContactInfoSliceVariation,
+      ContactInfoSliceDefault,
       CtaSlice,
       CtaSliceDefaultPrimary,
       CtaSliceVariation,

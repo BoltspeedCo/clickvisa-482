@@ -11,7 +11,7 @@ const Container = ({ size = 'default', className, children, }: ContainerProps) =
 
   return (
     <div className={cn(
-      " mx-auto px-8 md:px-12 lg:px-16 2xl:px-20 3xl:px-24",
+      " mx-auto px-6 md:px-12 lg:px-16 2xl:px-20 3xl:px-24",
       size === 'small' && "max-w-[800px]",
       size === 'wide' && "max-w-[1600px]",
       size === 'full' && "max-w-[1920px]",

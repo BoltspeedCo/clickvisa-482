@@ -10,9 +10,13 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@formspark/use-formspark": "^0.1.39",
+    "@hookform/resolvers": "^3.3.2",
     "@prismicio/client": "^7.3.1",
     "@prismicio/next": "^1.3.6",
     "@prismicio/react": "^2.7.3",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -22,8 +26,10 @@
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.47.0",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@slicemachine/adapter-next": "^0.3.21",
