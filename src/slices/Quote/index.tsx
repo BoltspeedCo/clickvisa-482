@@ -27,7 +27,7 @@ const Quote = ({ slice, context }: QuoteProps): JSX.Element => {
     >
       <Container className="" size="small">
         <div className="relative">
-          <Image src={'/images/quote.svg'} alt="quote" width={228} height={198} className=" w-56 h-auto -z-0 absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <Image src={'/images/quote.svg'} alt="quote" width={228} height={198} className=" w-40 md:w-56 h-auto -z-0 opacity-80 absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2" />
           <SmartText text={quoteText} variant="h2" size="h3" className="text-center italic font-light !leading-tight relative" />
 
         </div>

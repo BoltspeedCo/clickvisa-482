@@ -23,6 +23,7 @@ const ServiceHeader = ({ slice }: ServiceHeaderProps): JSX.Element => {
       name="service-header"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="pt-6 lg:pt-12 xl:pt-16"
     >
       <Container>
         <div className="">

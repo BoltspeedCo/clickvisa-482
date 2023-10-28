@@ -2,7 +2,20 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"buttonText": {
+				"__TYPE__": "FieldContent",
+				"value": "hold",
+				"type": "Text"
+			},
+			"buttonLink": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com"
+				}
+			}
+		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",

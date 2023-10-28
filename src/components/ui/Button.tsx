@@ -58,14 +58,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <span className="text-parent-top block ">
           {children.split('').map((child, i) => {
             return (
-              <span className="text-child-top inline-block min-w-[6px]" key={i}>{child}</span>
+              <span className="text-child-top inline-block min-w-[3px]" key={i}>{child}</span>
             )
           })}
         </span>
         <span ref={scope} className="text-parent block absolute -bottom-4 left-0 w-full">
           {children.split('').map((child, i) => {
             return (
-              <span className="text-child-bottom inline-block min-w-[6px]" key={i}>{child}</span>
+              <span className="text-child-bottom inline-block min-w-[3px]" key={i}>{child}</span>
             )
           })}
         </span>
@@ -120,14 +120,14 @@ const ButtonLink = ({ children, variant, size, className, ...props }: ButtonLink
       <span className="text-parent-top block ">
         {children.split('').map((child, i) => {
           return (
-            <span className="text-child-top inline-block min-w-[6px]" key={i}>{child}</span>
+            <span className="text-child-top inline-block min-w-[3px]" key={i}>{child}</span>
           )
         })}
       </span>
       <span ref={scope} className="text-parent block absolute -bottom-4 left-0 w-full">
         {children.split('').map((child, i) => {
           return (
-            <span className="text-child-bottom inline-block min-w-[6px]" key={i}>{child}</span>
+            <span className="text-child-bottom inline-block min-w-[3px]" key={i}>{child}</span>
           )
         })}
       </span>
@@ -172,14 +172,14 @@ const AnimatedLink = React.forwardRef<HTMLAnchorElement, React.ComponentPropsWit
       <span className="text-parent-top block ">
         {children.split('').map((child, i) => {
           return (
-            <span className="text-child-top inline-block min-w-[6px]" key={i}>{child}</span>
+            <span className="text-child-top inline-block min-w-[3px]" key={i}>{child}</span>
           )
         })}
       </span>
       <span ref={scope} className="text-parent block absolute -bottom-5 left-0 w-full">
         {children.split('').map((child, i) => {
           return (
-            <span className="text-child-bottom inline-block min-w-[6px]" key={i}>{child}</span>
+            <span className="text-child-bottom inline-block min-w-[3px]" key={i}>{child}</span>
           )
         })}
       </span>

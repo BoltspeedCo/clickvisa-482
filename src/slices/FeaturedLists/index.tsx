@@ -23,17 +23,17 @@ const FeaturedLists = ({ slice }: FeaturedListsProps): JSX.Element => {
     >
       <Container size="default">
 
-        <div className="max-w-4xl mx-auto space-y-6 lg:space-y-12">
+        <div className=" mx-auto space-y-6 lg:space-y-12">
           {lists.map((list, index) => {
             const { description, heading } = list
             return (
               <div className="" key={index}>
-                <div className="grid md:grid-cols-3 md:gap-8 lg:gap-12 ">
-                  <div className=" col-span-1 pt-2">
+                <div className="grid md:grid-cols-5 md:gap-2 lg:gap-2 ">
+                  <div className=" md:col-span-2 pt-2 md:pl-12 lg:pl-16">
                     <SmartText text={heading} variant="h3" size="h5" className="mb-3" />
                   </div>
 
-                  <div className=" col-span-2">
+                  <div className=" md:col-span-3 md:pr-8 lg:pr-16">
                     <SmartText text={description} variant="p" size="h4" className="text-justify mb-0 lg:mb-0" />
                   </div>
                 </div>

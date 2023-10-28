@@ -1459,6 +1459,31 @@ type StepsSliceVariation = StepsSliceDefault | StepsSliceStepGlobal;
 export type StepsSlice = prismic.SharedSlice<"steps", StepsSliceVariation>;
 
 /**
+ * Primary content in *Subservices → Primary*
+ */
+export interface SubservicesSliceDefaultPrimary {
+  /**
+   * button text field in *Subservices → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subservices.primary.buttonText
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  buttonText: prismic.KeyTextField;
+
+  /**
+   * button link field in *Subservices → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subservices.primary.buttonLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttonLink: prismic.LinkField;
+}
+
+/**
  * Primary content in *Subservices → Items*
  */
 export interface SubservicesSliceDefaultItem {
@@ -1492,7 +1517,7 @@ export interface SubservicesSliceDefaultItem {
  */
 export type SubservicesSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<SubservicesSliceDefaultPrimary>,
   Simplify<SubservicesSliceDefaultItem>
 >;
 
@@ -1800,6 +1825,7 @@ declare module "@prismicio/client" {
       StepsSliceDefault,
       StepsSliceStepGlobal,
       SubservicesSlice,
+      SubservicesSliceDefaultPrimary,
       SubservicesSliceDefaultItem,
       SubservicesSliceVariation,
       SubservicesSliceDefault,

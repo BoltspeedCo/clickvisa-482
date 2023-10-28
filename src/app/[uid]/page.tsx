@@ -3,7 +3,8 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import RootLayout from '@/components/RootLayout';
 import { NextPage, NextPageContext } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, } from 'next/navigation';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export default async function Pages({ params }: { params: { uid: string } }) {
   if (!params.uid) return null
@@ -17,6 +18,7 @@ export default async function Pages({ params }: { params: { uid: string } }) {
   // console.log("page", page)
   return (
     <RootLayout settings={settings} globalContext={globalSections}>
+      <Breadcrumbs />
       <SliceZone slices={page.data.slices} components={components} context={{
         globalSections: globalSections
       }} />
