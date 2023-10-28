@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
+import CountUp from "@/components/CountUp";
 import Section from "@/components/Section";
-import { SmartText } from "@/components/Typography";
+import Typography, { SmartText } from "@/components/Typography";
 import { cn } from "@/lib/utils";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -31,7 +32,14 @@ const ServiceHeader = ({ slice }: ServiceHeaderProps): JSX.Element => {
             <div className="w-full order-2 md:order-1 md:col-span-2  md:pr-6 lg:pr-12 mb-4 md:mb-0">
               <div className="max-w-[220px]  w-full">
                 <div className="flex items-end">
-                  <SmartText text={statsNumber} variant="h1" className="text-6xl  lg:text-7xl xl:text-8xl font-normal !leading-none italic mb-0 lg:mb-0" />
+                  {isFilled.number(statsNumber) ? (
+                    <>
+                      <Typography variant={'h2'} className="text-6xl  lg:text-7xl xl:text-8xl font-normal !leading-none italic mb-0 lg:mb-0">
+                        <CountUp countNumber={statsNumber} />
+
+                      </Typography>
+                    </>
+                  ) : null}
                   <SmartText text={statsUnit} variant="h4" className="text-2xl lg:text-3xl font-normal italic mb-0 lg:mb-0 pb-2" />
                 </div>
                 <SmartText text={statsCaption} variant="p" className="text-base font-normal" />
