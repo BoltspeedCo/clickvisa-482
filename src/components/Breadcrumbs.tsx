@@ -15,7 +15,7 @@ const Breadcrumbs = ({ }: Props) => {
     const paths = pathname.split('/').filter(Boolean).reduce((acc, path, i) => {
         if (i === 0) return [{
             name: noCase(path),
-            path: path
+            path: `/${path}`
         }]
         const newPath = {
             name: noCase(path),
