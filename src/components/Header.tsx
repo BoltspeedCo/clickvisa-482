@@ -18,7 +18,11 @@ export function Header({ headerMenu }: HeaderProps) {
     useEffect(() => {
         if (!bodyRef.current) {
             bodyRef.current = document.querySelector('body')
+            if (bodyRef.current && bodyRef.current.classList.contains('overflow-hidden')) {
+                bodyRef.current.classList.remove('overflow-hidden')
+            }
         }
+
     }, [])
     const handleClickMenu = () => {
         setMenuOpen(prev => !prev)
