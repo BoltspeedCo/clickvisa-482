@@ -26,7 +26,7 @@ const ContactInfo = ({ slice }: ContactInfoProps): JSX.Element => {
       <Container>
         <div className="md:w-7/12 ml-auto">
           <SmartText text={heading} variant="h2" size="h3" className="  mb-12 md:mb-16 lg:mb-20 xl:mb-32" />
-          <div className="grid md:grid-cols-2 md:gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-8 lg:gap-12">
             {contactInfo.map((item, index) => {
               const { heading, link, text } = item
               return (

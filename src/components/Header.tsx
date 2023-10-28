@@ -36,7 +36,7 @@ export function Header({ headerMenu }: HeaderProps) {
                 <div className="">
                     <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
                 </div>
-                <nav className="hidden md:flex gap-4 lg:gap-12 items-center">
+                <nav className="hidden md:flex gap-6 lg:gap-12 items-center">
                     {headerMenu.map((menu, index) => {
                         const {
                             link,
@@ -69,7 +69,7 @@ export function Header({ headerMenu }: HeaderProps) {
             <>
                 <div className="fixed z-50 bg-muted h-[calc(100%-56px)] w-full top-14 left-0">
                     <ScrollArea className="w-full h-full">
-                        <nav className="space-y-3 p-6">
+                        <nav className="space-y-5 p-6">
                             {headerMenu.map((menu, index) => {
                                 const {
                                     link,
@@ -86,13 +86,13 @@ export function Header({ headerMenu }: HeaderProps) {
                                         </AnimatedLink>}
                                     </> : null}
                                     {submenu && submenu.length > 0 ? (
-                                        <div className="space-y-3">
+                                        <div className="space-y-4">
                                             {submenu.map((submenuItem, index) => {
                                                 const { childName, childLink } = submenuItem
                                                 return (
                                                     <>
                                                         {isFilled.link(childLink) && isFilled.keyText(childName) ? <>
-                                                            <AnimatedLink href={childLink.url || ''} className="block text-sm uppercase relative py-2 pl-6 before:content-[''] before:block before:h-px before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:bg-foreground before:w-4">
+                                                            <AnimatedLink href={childLink.url || ''} className="block text-sm uppercase relative py-2 pl-8 before:content-[''] before:block before:h-px before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:bg-foreground before:w-6">
                                                                 {childName}
                                                             </AnimatedLink>
                                                         </> : null}
