@@ -29,11 +29,11 @@ const Breadcrumbs = ({ }: Props) => {
     return (
         <Section name="breadcrumb" className='pt-12 pb-6 lg:pt-32 lg:pb-6'>
             <Container >
-                <div className="flex md:grid md:grid-cols-5 gap-2 items-center md:items-end">
+                <div className=" grid md:grid-cols-5 gap-2 items-center md:items-end">
                     <nav className="flex md:col-span-2" aria-label="Breadcrumb">
-                        <ol role="list" className="flex items-center space-x-4 text-sm uppercase">
+                        <ol role="list" className="flex items-center space-x-1 md:space-x-4 text-xs md:text-sm uppercase">
                             <li>
-                                <div className='flex gap-2 items-center'>
+                                <div className='flex gap-1 md:gap-2 items-center'>
                                     <Link href="/" className="">
 
                                         <span className="">Home</span>
@@ -53,7 +53,7 @@ const Breadcrumbs = ({ }: Props) => {
                                 return (
 
                                     <li key={name}>
-                                        <div className='flex gap-2 items-center'>
+                                        <div className='flex gap-1 md:gap-2 items-center'>
                                             <Link href={path} className="">
 
                                                 <span className="">{name}</span>

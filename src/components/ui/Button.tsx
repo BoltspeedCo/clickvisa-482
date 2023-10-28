@@ -52,57 +52,66 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const [scope, animate] = useAnimate()
+    if (typeof children === 'string') {
+      return (
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+          onMouseEnter={() => {
+            animate('.text-child-top', {
+              y: -16,
+            }, {
+              delay: staggerMenuText
+            })
+            animate('.text-child-bottom', {
+              y: -16,
+            }, {
+              delay: staggerMenuText
+            })
+          }}
+          onMouseLeave={() => {
+            animate('.text-child-top', {
+              y: 0,
+            }, {
+              delay: staggerMenuText
+            })
+            animate('.text-child-bottom', {
+              y: 0,
+            }, {
+              delay: staggerMenuText
+            })
+          }}
+        >
+          <span ref={scope} className="overflow-hidden block relative">
+            <span className="text-parent-top block ">
+              {children.split('').map((child, i) => {
+                return (
+                  <span className="text-child-top inline-block min-w-[3px]" key={i}>{child}</span>
+                )
+              })}
+            </span>
+            <span ref={scope} className="text-parent block absolute -bottom-4 left-0 w-full">
+              {children.split('').map((child, i) => {
+                return (
+                  <span className="text-child-bottom inline-block min-w-[3px]" key={i}>{child}</span>
+                )
+              })}
+            </span>
+          </span>
+        </Comp>
+      )
+    }
 
-    const childrenText = typeof children === "string" ? (
-      <span ref={scope} className="overflow-hidden block relative">
-        <span className="text-parent-top block ">
-          {children.split('').map((child, i) => {
-            return (
-              <span className="text-child-top inline-block min-w-[3px]" key={i}>{child}</span>
-            )
-          })}
-        </span>
-        <span ref={scope} className="text-parent block absolute -bottom-4 left-0 w-full">
-          {children.split('').map((child, i) => {
-            return (
-              <span className="text-child-bottom inline-block min-w-[3px]" key={i}>{child}</span>
-            )
-          })}
-        </span>
-      </span>
-    ) : children
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-        onMouseEnter={() => {
-          animate('.text-child-top', {
-            y: -16,
-          }, {
-            delay: staggerMenuText
-          })
-          animate('.text-child-bottom', {
-            y: -16,
-          }, {
-            delay: staggerMenuText
-          })
-        }}
-        onMouseLeave={() => {
-          animate('.text-child-top', {
-            y: 0,
-          }, {
-            delay: staggerMenuText
-          })
-          animate('.text-child-bottom', {
-            y: 0,
-          }, {
-            delay: staggerMenuText
-          })
-        }}
+
       >
 
-        {childrenText}
+        {children}
       </Comp>
     )
   }

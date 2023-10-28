@@ -12,11 +12,16 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AnimatedLink, ButtonLink, buttonVariants } from "./ui/Button";
 import React from "react";
+import { Header } from "./Header";
 interface ILayout {
   children: ReactNode;
   globalContext: GlobalSectionsDocument<string>
   settings: SettingsDocument<string>
 }
+
+
+
+
 
 const RootLayout = ({ settings, globalContext, children }: ILayout) => {
   const { footerHeading } = globalContext.data
@@ -25,40 +30,7 @@ const RootLayout = ({ settings, globalContext, children }: ILayout) => {
     <>
       {/* <Header headerType={headerType} /> */}
       <div className="" id="top"></div>
-      <header className="">
-        <Container size="wide" className="py-3 lg:py-4">
-          <div className="flex justify-between items-center">
-            <div className="">
-              <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
-            </div>
-            <nav className="flex gap-4 lg:gap-12 items-center">
-              {headerMenu.map((menu, index) => {
-                const { link, name, asButton } = menu.primary
-                return (
-                  <div className="" key={index}>
-                    {isFilled.link(link) && isFilled.keyText(name) ? (
-                      <>
-                        {
-                          asButton ? (
-                            <ButtonLink href={link.url || ''} variant={'fill'} size="sm" className="mx-2">
-                              {name}
-                            </ButtonLink>
-                          ) : (
-                            <AnimatedLink href={link.url || ''} >
-                              {name}
-                            </AnimatedLink>
-                          )
-                        }
-                      </>
-                    ) : null}
-                  </div>
-                )
-              })}
-
-            </nav>
-          </div>
-        </Container>
-      </header>
+      <Header headerMenu={headerMenu}></Header>
       <main id="main" className="flex-1">{children}</main>
       {/* <Footer /> */}
       <footer className="pt-20 pb-8 lg:pb-20 lg:pt-40 relative">
