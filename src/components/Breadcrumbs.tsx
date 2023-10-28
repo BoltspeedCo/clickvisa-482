@@ -25,7 +25,6 @@ const Breadcrumbs = ({ }: Props) => {
     }, [{ name: '', path: '' }])
     const parents = paths.slice(0, paths.length - 1)
     const currentPath = paths[paths.length - 1]
-    console.log("routepathnamer", paths)
     return (
         <Section name="breadcrumb" className='pt-12 pb-6 lg:pt-32 lg:pb-6'>
             <Container >

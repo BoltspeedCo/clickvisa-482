@@ -4,7 +4,7 @@ import Container from "./Container";
 import Image from 'next/image'
 import { ButtonLink, AnimatedLink, Button } from "./ui/Button";
 import { NavigationItemSlice } from "../../prismicio-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { MenuIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/Scroll-area";
@@ -14,11 +14,16 @@ type HeaderProps = {
 }
 export function Header({ headerMenu }: HeaderProps) {
     const [menuOpen, setMenuOpen] = React.useState(false)
-    const body = document.querySelector('body')
+    const bodyRef = React.useRef<HTMLBodyElement | null>(null);
+    useEffect(() => {
+        if (!bodyRef.current) {
+            bodyRef.current = document.querySelector('body')
+        }
+    }, [])
     const handleClickMenu = () => {
         setMenuOpen(prev => !prev)
-        if (body) {
-            body.classList.toggle('overflow-hidden')
+        if (bodyRef.current) {
+            bodyRef.current.classList.toggle('overflow-hidden')
         }
     }
     return (<header className="sticky top-0 bg-background z-50">
