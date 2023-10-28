@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { MenuIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/Scroll-area";
+import Link from "next/link";
 
 type HeaderProps = {
     headerMenu: SliceZone<NavigationItemSlice>
@@ -34,7 +35,9 @@ export function Header({ headerMenu }: HeaderProps) {
         <Container size="wide" className="py-2 lg:py-4">
             <div className="flex justify-between items-center">
                 <div className="">
-                    <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
+                    <Link href="/" className="block w-fit py-2 md:py-1">
+                        <Image src={'/images/clickvisa-logo.svg'} alt="clickvisa-logo" className="h-4 lg:h-6 w-auto" width={200} height={50} />
+                    </Link>
                 </div>
                 <nav className="hidden md:flex gap-6 lg:gap-12 items-center">
                     {headerMenu.map((menu, index) => {
@@ -55,7 +58,7 @@ export function Header({ headerMenu }: HeaderProps) {
                     })}
 
                 </nav>
-                <div className="md:hidden">
+                <div className="md:hidden -mr-4">
                     <Button variant={'ghost'} onClick={() => handleClickMenu()}  >
                         <span className={
                             cn("block transition-all", menuOpen ? 'rotate-180' : '')

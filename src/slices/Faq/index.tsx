@@ -34,7 +34,7 @@ const Faq = ({ slice, }: FaqProps): JSX.Element => {
               const { answer, question } = faqItem
               return (
                 <AccordionItem value={`item-${index}`} key={index}>
-                  <AccordionTrigger ><SmartText text={question} variant="span" /></AccordionTrigger>
+                  <AccordionTrigger ><SmartText text={question} variant="span" className="text-left !leading-tight" /></AccordionTrigger>
                   <AccordionContent>
                     <SmartText text={answer} variant="p" className="mb-0 lg:mb-0" />
                   </AccordionContent>
