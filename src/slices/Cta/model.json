@@ -56,6 +56,16 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "globalCta",
+      "name": "Global Cta",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
     }
   ]
 }

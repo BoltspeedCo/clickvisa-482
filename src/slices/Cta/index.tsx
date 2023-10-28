@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import { SmartText } from "@/components/Typography";
 import { Button } from "@/components/ui/Button";
+import { SliceZoneContext } from "@/custom";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Image from "next/image";
@@ -13,8 +14,23 @@ export type CtaProps = SliceComponentProps<Content.CtaSlice>;
 /**
  * Component for "Cta" Slices.
  */
-const Cta = ({ slice }: CtaProps): JSX.Element => {
-  const { bodyText, buttonLink, buttonText, heading, preHeading } = slice.primary;
+const Cta = ({ slice, context }: CtaProps): JSX.Element => {
+  const { bodyText: sliceBodyText, buttonLink: sliceButtonLink, buttonText: sliceButtonText, heading: sliceHeading, preHeading: slicePreheading } = slice.primary;
+  const sliceZoneContext = context as SliceZoneContext
+  const { ctaBodyText, ctaButtonLink, ctaButtonText, ctaHeading, ctaPreheading } = sliceZoneContext.globalSections.data
+  let preHeading = slicePreheading
+  let heading = sliceHeading
+  let bodyText = sliceBodyText
+  let buttonText = sliceButtonText
+  let buttonLink = sliceButtonLink
+
+  if (slice.variation === 'globalCta') {
+    preHeading = ctaPreheading
+    heading = ctaHeading
+    bodyText = ctaBodyText
+    buttonText = ctaButtonText
+    buttonLink = ctaButtonLink
+  }
   return (
     <Section
       name="cta"
@@ -22,7 +38,7 @@ const Cta = ({ slice }: CtaProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       <Container size="wide" className="">
-        <div className=" bg-foreground relative overflow-hidden">
+        <div className="-mx-4 md:mx-0 bg-foreground relative overflow-hidden">
           <div className="absolute w-full md:w-2/3 lg:w-7/12 right-0 h-[150px] md:h-full bottom-0 md:top-0 overflow-hidden">
             <Image src={'/images/cta-bg.png'} alt={'cta-background'} className="left-0 w-full h-full object-right-center lg:object-right-center object-cover relative grayscale" width={1000} height={1000} />
 

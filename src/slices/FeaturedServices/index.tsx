@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import { SmartText } from "@/components/Typography";
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Content, FilledContentRelationshipField, ImageField, KeyTextField, RichTextField, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Image from "next/image";
@@ -31,7 +31,7 @@ const FeaturedServices = ({ slice }: FeaturedServicesProps): JSX.Element => {
             {featuredServices.map((featuredService, index) => {
               if (!isFilled.contentRelationship(featuredService.service)) return
               const { service } = featuredService
-              const { data } = service as FilledContentRelationshipField<"service", string, {
+              const { data, uid } = service as FilledContentRelationshipField<"service", string, {
                 name: KeyTextField;
                 featuredDescription: RichTextField
                 featuredIcon: ImageField
@@ -47,14 +47,13 @@ const FeaturedServices = ({ slice }: FeaturedServicesProps): JSX.Element => {
                       </div>
                     ) : null
                     }
-
                     <div className="flex-1 flex flex-col" key={index}>
                       <SmartText text={name} variant="h4" size="h5" className="font-bold mb-3 lg:mb-4 capitalize" />
                       <SmartText text={featuredDescription} variant="p" className="mb-0 lg:mb-0 text-justify" />
                       <div className="mt-auto">
-                        <Button className="mt-4 md:mt-6 lg:mt-10 xl:mt-14">
+                        <ButtonLink href={`services/${uid}`} className="mt-4 md:mt-6 lg:mt-10 xl:mt-14">
                           Learn More
-                        </Button>
+                        </ButtonLink>
                       </div>
                     </div>
                   </div>

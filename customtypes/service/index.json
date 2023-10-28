@@ -41,6 +41,24 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "faq": {
+              "type": "SharedSlice"
+            },
+            "cta": {
+              "type": "SharedSlice"
+            },
+            "about_heading_bodytext": {
+              "type": "SharedSlice"
+            },
+            "steps": {
+              "type": "SharedSlice"
+            },
+            "subservices": {
+              "type": "SharedSlice"
+            },
+            "quote": {
+              "type": "SharedSlice"
+            },
             "service_header": {
               "type": "SharedSlice"
             }

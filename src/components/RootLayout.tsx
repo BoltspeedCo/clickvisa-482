@@ -11,6 +11,7 @@ import { isFilled } from "@prismicio/client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AnimatedLink, ButtonLink, buttonVariants } from "./ui/Button";
+import React from "react";
 interface ILayout {
   children: ReactNode;
   globalContext: GlobalSectionsDocument<string>
@@ -74,10 +75,10 @@ const RootLayout = ({ settings, globalContext, children }: ILayout) => {
                   <div className={cn(index === footerMenu.length - 1 && 'text-right')} key={index}>
                     <SmartText text={group_name} variant="h3" size="p" className="uppercase font-light text-xs lg:text-xs" />
                     <ul className="flex flex-col gap-2">
-                      {menuItems.map((menu, index) => {
+                      {menuItems.map((menu, menuIndex) => {
                         const { menuText, menuLink } = menu
                         return (
-                          <li key={index}>
+                          <li key={menuIndex}>
                             {isFilled.link(menuLink) ? (
                               <Link href={menuLink.url || ''} >
                                 <SmartText text={menuText} variant="p" className="mb-0 lg:mb-0" />
@@ -102,13 +103,13 @@ const RootLayout = ({ settings, globalContext, children }: ILayout) => {
               {social.map((socialItem, index) => {
                 const { link, platform } = socialItem
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     {isFilled.link(link) && isFilled.keyText(platform) ? (
                       <Link href={link.url || ''} className="leading-none" key={index}>
                         <SmartText text={platform} variant="span" className="mb-0 text-sm underline lg:mb-0 uppercase" />
                       </Link>
                     ) : null}
-                  </>
+                  </React.Fragment>
                 )
               })}
             </div>

@@ -24,6 +24,8 @@ const Steps = ({ slice, context }: StepsProps & { context: SliceZoneContext }): 
       name="steps"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="pb-6 lg:pb-12"
+
     >
       <Container size="default">
         {slice.variation === 'default' ? (

@@ -3,9 +3,11 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  about_heading_bodytext: dynamic(() => import("./AboutHeadingBodytext")),
   advantage: dynamic(() => import("./Advantage")),
   contact_info: dynamic(() => import("./ContactInfo")),
   cta: dynamic(() => import("./Cta")),
+  faq: dynamic(() => import("./Faq")),
   featured_lists: dynamic(() => import("./FeaturedLists")),
   featured_services: dynamic(() => import("./FeaturedServices")),
   footer_navigation_item: dynamic(() => import("./FooterNavigationItem")),
@@ -16,6 +18,7 @@ export const components = {
   services_lists: dynamic(() => import("./ServicesLists")),
   simple_text_field: dynamic(() => import("./SimpleTextField")),
   steps: dynamic(() => import("./Steps")),
+  subservices: dynamic(() => import("./Subservices")),
   team_lists: dynamic(() => import("./TeamLists")),
   team_partners: dynamic(() => import("./TeamPartners")),
 };

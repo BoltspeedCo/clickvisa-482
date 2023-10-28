@@ -3,7 +3,7 @@ import { ILoremIpsumParams } from "lorem-ipsum";
 import { LoremUnit } from "lorem-ipsum/types/src/constants/units";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { KeyTextField, RichTextField, isFilled } from "@prismicio/client";
+import { KeyTextField, NumberField, RichTextField, isFilled } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
 import WithPlaceholderText from "./WithPlaceholderText";
 
@@ -101,7 +101,7 @@ const Typography = ({
 
 
 type SmartTextProps = {
-  text: string | RichTextField | KeyTextField
+  text: string | RichTextField | KeyTextField | NumberField
   variant: TypographyVariants
 }
 
@@ -112,6 +112,10 @@ export const SmartText = ({
   ...props
 }: SmartTextProps & React.ComponentPropsWithoutRef<typeof Typography>) => {
   if (!text) return null
+  if (typeof text === 'number') {
+    const filledText = isFilled.number(text) ? text : null
+    return <Typography variant={variant} {...props}>{filledText}</Typography>
+  }
   if (typeof text === 'string') {
     const filledText = isFilled.keyText(text) ? text : null
     return <Typography variant={variant} {...props}>{filledText}</Typography>

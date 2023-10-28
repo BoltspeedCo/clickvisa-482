@@ -27,7 +27,7 @@
             "label": "body text",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph"
+            "multi": "paragraph,strong,em,hyperlink"
           }
         },
         "statsNumber": {
@@ -52,7 +52,16 @@
           }
         }
       },
-      "items": {}
+      "items": {
+        "lawyer": {
+          "type": "Image",
+          "config": {
+            "label": "lawyer",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      }
     }
   ]
 }

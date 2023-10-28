@@ -142,7 +142,71 @@ interface GlobalSectionsDocumentData {
    */
   stepItems: prismic.GroupField<
     Simplify<GlobalSectionsDocumentDataStepItemsItem>
-  >;
+  >
+  /**
+   * cta preheading field in *Global Sections*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.ctaPreheading
+   * - **Tab**: Cta
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */;
+  ctaPreheading: prismic.TitleField;
+
+  /**
+   * cta heading field in *Global Sections*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.ctaHeading
+   * - **Tab**: Cta
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  ctaHeading: prismic.TitleField;
+
+  /**
+   * cta body text field in *Global Sections*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.ctaBodyText
+   * - **Tab**: Cta
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  ctaBodyText: prismic.RichTextField;
+
+  /**
+   * cta button text field in *Global Sections*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.ctaButtonText
+   * - **Tab**: Cta
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  ctaButtonText: prismic.KeyTextField;
+
+  /**
+   * cta button link field in *Global Sections*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.ctaButtonLink
+   * - **Tab**: Cta
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  ctaButtonLink: prismic.LinkField
+  /**
+   * quote heading field in *Global Sections*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: globalSections.quoteHeading
+   * - **Tab**: Quote
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */;
+  quoteHeading: prismic.RichTextField;
 }
 
 /**
@@ -161,7 +225,14 @@ export type GlobalSectionsDocument<Lang extends string = string> =
     Lang
   >;
 
-type ServiceDocumentDataSlicesSlice = ServiceHeaderSlice;
+type ServiceDocumentDataSlicesSlice =
+  | FaqSlice
+  | CtaSlice
+  | AboutHeadingBodytextSlice
+  | StepsSlice
+  | SubservicesSlice
+  | QuoteSlice
+  | ServiceHeaderSlice;
 
 /**
  * Content for Service documents
@@ -346,6 +417,61 @@ export type AllDocumentTypes =
   | GlobalSectionsDocument
   | ServiceDocument
   | SettingsDocument;
+
+/**
+ * Primary content in *AboutHeadingBodytext → Primary*
+ */
+export interface AboutHeadingBodytextSliceDefaultPrimary {
+  /**
+   * heading field in *AboutHeadingBodytext → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_heading_bodytext.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * body text field in *AboutHeadingBodytext → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_heading_bodytext.primary.bodyText
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bodyText: prismic.RichTextField;
+}
+
+/**
+ * Default variation for AboutHeadingBodytext Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutHeadingBodytextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AboutHeadingBodytextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AboutHeadingBodytext*
+ */
+type AboutHeadingBodytextSliceVariation = AboutHeadingBodytextSliceDefault;
+
+/**
+ * AboutHeadingBodytext Shared Slice
+ *
+ * - **API ID**: `about_heading_bodytext`
+ * - **Description**: AboutHeadingBodytext
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutHeadingBodytextSlice = prismic.SharedSlice<
+  "about_heading_bodytext",
+  AboutHeadingBodytextSliceVariation
+>;
 
 /**
  * Primary content in *Advantage → Primary*
@@ -596,9 +722,22 @@ export type CtaSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Global Cta variation for Cta Slice
+ *
+ * - **API ID**: `globalCta`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceGlobalCta = prismic.SharedSliceVariation<
+  "globalCta",
+  Record<string, never>,
+  never
+>;
+
+/**
  * Slice variation for *Cta*
  */
-type CtaSliceVariation = CtaSliceDefault;
+type CtaSliceVariation = CtaSliceDefault | CtaSliceGlobalCta;
 
 /**
  * Cta Shared Slice
@@ -608,6 +747,73 @@ type CtaSliceVariation = CtaSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type CtaSlice = prismic.SharedSlice<"cta", CtaSliceVariation>;
+
+/**
+ * Primary content in *Faq → Primary*
+ */
+export interface FaqSliceDefaultPrimary {
+  /**
+   * heading field in *Faq → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Faq → Items*
+ */
+export interface FaqSliceDefaultItem {
+  /**
+   * question field in *Faq → Items*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.items[].question
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  question: prismic.TitleField;
+
+  /**
+   * answer field in *Faq → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.items[].answer
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Faq Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqSliceDefaultPrimary>,
+  Simplify<FaqSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Faq*
+ */
+type FaqSliceVariation = FaqSliceDefault;
+
+/**
+ * Faq Shared Slice
+ *
+ * - **API ID**: `faq`
+ * - **Description**: Faq
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSlice = prismic.SharedSlice<"faq", FaqSliceVariation>;
 
 /**
  * Primary content in *FeaturedLists → Items*
@@ -956,9 +1162,22 @@ export type QuoteSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Global Quote variation for Quote Slice
+ *
+ * - **API ID**: `globalQuote`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type QuoteSliceGlobalQuote = prismic.SharedSliceVariation<
+  "globalQuote",
+  Record<string, never>,
+  never
+>;
+
+/**
  * Slice variation for *Quote*
  */
-type QuoteSliceVariation = QuoteSliceDefault;
+type QuoteSliceVariation = QuoteSliceDefault | QuoteSliceGlobalQuote;
 
 /**
  * Quote Shared Slice
@@ -1025,6 +1244,21 @@ export interface ServiceHeaderSliceDefaultPrimary {
 }
 
 /**
+ * Primary content in *ServiceHeader → Items*
+ */
+export interface ServiceHeaderSliceDefaultItem {
+  /**
+   * lawyer field in *ServiceHeader → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: service_header.items[].lawyer
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  lawyer: prismic.ImageField<never>;
+}
+
+/**
  * Default variation for ServiceHeader Slice
  *
  * - **API ID**: `default`
@@ -1034,7 +1268,7 @@ export interface ServiceHeaderSliceDefaultPrimary {
 export type ServiceHeaderSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ServiceHeaderSliceDefaultPrimary>,
-  never
+  Simplify<ServiceHeaderSliceDefaultItem>
 >;
 
 /**
@@ -1223,6 +1457,61 @@ type StepsSliceVariation = StepsSliceDefault | StepsSliceStepGlobal;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type StepsSlice = prismic.SharedSlice<"steps", StepsSliceVariation>;
+
+/**
+ * Primary content in *Subservices → Items*
+ */
+export interface SubservicesSliceDefaultItem {
+  /**
+   * heading field in *Subservices → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subservices.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * description field in *Subservices → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subservices.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Subservices Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubservicesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<SubservicesSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Subservices*
+ */
+type SubservicesSliceVariation = SubservicesSliceDefault;
+
+/**
+ * Subservices Shared Slice
+ *
+ * - **API ID**: `subservices`
+ * - **Description**: Subservices
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubservicesSlice = prismic.SharedSlice<
+  "subservices",
+  SubservicesSliceVariation
+>;
 
 /**
  * Primary content in *TeamLists → Primary*
@@ -1439,6 +1728,10 @@ declare module "@prismicio/client" {
       SettingsDocumentDataSlices1Slice,
       SettingsDocumentDataSocialItem,
       AllDocumentTypes,
+      AboutHeadingBodytextSlice,
+      AboutHeadingBodytextSliceDefaultPrimary,
+      AboutHeadingBodytextSliceVariation,
+      AboutHeadingBodytextSliceDefault,
       AdvantageSlice,
       AdvantageSliceDefaultPrimary,
       AdvantageSliceDefaultItem,
@@ -1453,6 +1746,12 @@ declare module "@prismicio/client" {
       CtaSliceDefaultPrimary,
       CtaSliceVariation,
       CtaSliceDefault,
+      CtaSliceGlobalCta,
+      FaqSlice,
+      FaqSliceDefaultPrimary,
+      FaqSliceDefaultItem,
+      FaqSliceVariation,
+      FaqSliceDefault,
       FeaturedListsSlice,
       FeaturedListsSliceDefaultItem,
       FeaturedListsSliceVariation,
@@ -1480,8 +1779,10 @@ declare module "@prismicio/client" {
       QuoteSliceDefaultPrimary,
       QuoteSliceVariation,
       QuoteSliceDefault,
+      QuoteSliceGlobalQuote,
       ServiceHeaderSlice,
       ServiceHeaderSliceDefaultPrimary,
+      ServiceHeaderSliceDefaultItem,
       ServiceHeaderSliceVariation,
       ServiceHeaderSliceDefault,
       ServicesListsSlice,
@@ -1498,6 +1799,10 @@ declare module "@prismicio/client" {
       StepsSliceVariation,
       StepsSliceDefault,
       StepsSliceStepGlobal,
+      SubservicesSlice,
+      SubservicesSliceDefaultItem,
+      SubservicesSliceVariation,
+      SubservicesSliceDefault,
       TeamListsSlice,
       TeamListsSliceDefaultPrimary,
       TeamListsSliceDefaultItem,

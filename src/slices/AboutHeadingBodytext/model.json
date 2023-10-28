@@ -1,8 +1,8 @@
 {
-  "id": "quote",
+  "id": "about_heading_bodytext",
   "type": "SharedSlice",
-  "name": "Quote",
-  "description": "Quote",
+  "name": "AboutHeadingBodytext",
+  "description": "AboutHeadingBodytext",
   "variations": [
     {
       "id": "default",
@@ -18,20 +18,19 @@
             "label": "heading",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph"
+            "single": "heading2,strong"
+          }
+        },
+        "bodyText": {
+          "type": "StructuredText",
+          "config": {
+            "label": "body text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
           }
         }
       },
-      "items": {}
-    },
-    {
-      "id": "globalQuote",
-      "name": "Global Quote",
-      "docURL": "...",
-      "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
-      "primary": {},
       "items": {}
     }
   ]
