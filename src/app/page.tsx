@@ -38,12 +38,13 @@ export default async function Home() {
           addressLocality: isFilled.keyText(addressLocality) ? addressLocality : '',
           addressRegion: isFilled.keyText(addressRegion) ? addressRegion : '',
           postalCode: isFilled.keyText(postalCode) ? postalCode : '',
+          addressCountry: isFilled.keyText(addressCountry) ? addressCountry : '',
         }}
         id={websiteConfig.siteUrl}
         description={isFilled.keyText(businessDescription) ? businessDescription : ''}
         email={businessEmail}
         name={isFilled.keyText(businessName) ? businessName : websiteConfig.siteName}
-
+        images={isFilled.group(images) ? images.filter(item => isFilled.image(item.image) && item.image.url).map(item => item.image.url || '') : undefined}
       // images={images}
       />
       <LogoJsonLd

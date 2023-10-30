@@ -2,9 +2,31 @@ import { SliceZone } from '@prismicio/react'
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import RootLayout from '@/components/RootLayout';
-import { NextPage, NextPageContext } from 'next';
+import { Metadata, NextPage, NextPageContext } from 'next';
 import { notFound, } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { websiteConfig } from '@/config';
+import { isFilled } from '@prismicio/client';
+
+
+export async function generateMetadata({ params }: { params: { uid: string } }): Promise<Metadata> {
+  const client = createClient();
+  const page = await client.getByUID('flexiblePage', params.uid)
+
+  return {
+    title: page.data.meta_title || 'Clickvisa',
+    description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+    openGraph: {
+      type: 'website',
+      url: websiteConfig.siteUrl + page.uid,
+      title: page.data.meta_title || websiteConfig.defaultMetadata.title,
+      description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+      siteName: websiteConfig.siteName,
+      images: isFilled.image(page.data.meta_image) ? [page.data.meta_image.url] : undefined
+
+    }
+  }
+}
 
 export default async function Pages({ params }: { params: { uid: string } }) {
   if (!params.uid) return null
