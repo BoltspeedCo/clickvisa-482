@@ -1,6 +1,6 @@
 {
-  "id": "flexiblePage",
-  "label": "Flexible Page",
+  "id": "landingPage",
+  "label": "Landing Page",
   "format": "page",
   "repeatable": true,
   "status": true,
@@ -20,43 +20,34 @@
             "wysiwyg_text_block": {
               "type": "SharedSlice"
             },
+            "cta_contact": {
+              "type": "SharedSlice"
+            },
             "subservices": {
               "type": "SharedSlice"
             },
             "faq": {
               "type": "SharedSlice"
             },
-            "contact_info": {
-              "type": "SharedSlice"
-            },
-            "services_lists": {
-              "type": "SharedSlice"
-            },
-            "team_lists": {
+            "about_heading_bodytext": {
               "type": "SharedSlice"
             },
             "team_partners": {
               "type": "SharedSlice"
             },
-            "featured_lists": {
+            "cta_guarantee": {
               "type": "SharedSlice"
             },
             "steps": {
               "type": "SharedSlice"
             },
-            "cta": {
+            "about_image": {
               "type": "SharedSlice"
             },
-            "featured_services": {
+            "benefits": {
               "type": "SharedSlice"
             },
-            "quote": {
-              "type": "SharedSlice"
-            },
-            "advantage": {
-              "type": "SharedSlice"
-            },
-            "hero": {
+            "lp_hero": {
               "type": "SharedSlice"
             }
           }

@@ -1,8 +1,8 @@
 {
-  "id": "about_heading_bodytext",
+  "id": "benefits",
   "type": "SharedSlice",
-  "name": "AboutHeadingBodytext",
-  "description": "AboutHeadingBodytext",
+  "name": "Benefits",
+  "description": "Benefits",
   "variations": [
     {
       "id": "default",
@@ -19,15 +19,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "single": "heading2,strong"
-          }
-        },
-        "bodyText": {
-          "type": "StructuredText",
-          "config": {
-            "label": "body text",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
           }
         },
         "buttonText": {
@@ -47,7 +38,26 @@
           }
         }
       },
-      "items": {}
+      "items": {
+        "benefitHeading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "benefit heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading4"
+          }
+        },
+        "benefitdescription": {
+          "type": "StructuredText",
+          "config": {
+            "label": "benefitDescription",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        }
+      }
     }
   ]
 }

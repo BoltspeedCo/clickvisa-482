@@ -1,8 +1,8 @@
 {
-  "id": "about_heading_bodytext",
+  "id": "cta_guarantee",
   "type": "SharedSlice",
-  "name": "AboutHeadingBodytext",
-  "description": "AboutHeadingBodytext",
+  "name": "CtaGuarantee",
+  "description": "CtaGuarantee",
   "variations": [
     {
       "id": "default",
@@ -27,7 +27,7 @@
             "label": "body text",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
+            "multi": "paragraph,strong,em,hyperlink"
           }
         },
         "buttonText": {
@@ -44,6 +44,14 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "select": null
+          }
+        },
+        "guaranteeImage": {
+          "type": "Image",
+          "config": {
+            "label": "guarantee image",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

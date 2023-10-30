@@ -42,7 +42,8 @@ export default async function Home() {
         }}
         id={websiteConfig.siteUrl}
         description={isFilled.keyText(businessDescription) ? businessDescription : ''}
-        email={businessEmail}
+        email={isFilled.keyText(businessEmail) ? businessEmail : ''}
+        telephone={isFilled.keyText(businessTelephone) ? businessTelephone : ''}
         name={isFilled.keyText(businessName) ? businessName : websiteConfig.siteName}
         images={isFilled.group(images) ? images.filter(item => isFilled.image(item.image) && item.image.url).map(item => item.image.url || '') : undefined}
       // images={images}

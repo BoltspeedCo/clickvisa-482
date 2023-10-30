@@ -9,7 +9,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "Habit"
+							"text": "Stiff"
 						}
 					}
 				]
@@ -20,22 +20,10 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Id nulla est qui elit Lorem."
+							"text": "Dolore qui ad qui dolore amet duis aliquip. Excepteur officia eu Lorem nostrud sint duis eu ad aliqua aliqua eiusmod. Nostrud fugiat commodo commodo."
 						}
 					}
 				]
-			},
-			"buttonText": {
-				"__TYPE__": "FieldContent",
-				"value": "point",
-				"type": "Text"
-			},
-			"buttonLink": {
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "https://prismic.io"
-				}
 			}
 		},
 		"items": []

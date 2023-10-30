@@ -1,8 +1,8 @@
 {
-  "id": "about_heading_bodytext",
+  "id": "cta_contact",
   "type": "SharedSlice",
-  "name": "AboutHeadingBodytext",
-  "description": "AboutHeadingBodytext",
+  "name": "CtaContact",
+  "description": "CtaContact",
   "variations": [
     {
       "id": "default",
@@ -27,23 +27,7 @@
             "label": "body text",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "buttonText": {
-          "type": "Text",
-          "config": {
-            "label": "button text",
-            "placeholder": ""
-          }
-        },
-        "buttonLink": {
-          "type": "Link",
-          "config": {
-            "label": "button link",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "select": null
+            "multi": "paragraph,heading4,strong,o-list-item,list-item,hyperlink,em"
           }
         }
       },
