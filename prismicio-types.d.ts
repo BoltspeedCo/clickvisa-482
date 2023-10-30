@@ -30,8 +30,7 @@ interface FlexiblePageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<FlexiblePageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<FlexiblePageDocumentDataSlicesSlice> /**
    * Meta Description field in *Flexible Page*
    *
    * - **Field Type**: Text
@@ -119,8 +118,7 @@ interface GlobalSectionsDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  footerHeading: prismic.RichTextField
-  /**
+  footerHeading: prismic.RichTextField /**
    * steps Heading field in *Global Sections*
    *
    * - **Field Type**: Rich Text
@@ -142,8 +140,7 @@ interface GlobalSectionsDocumentData {
    */
   stepItems: prismic.GroupField<
     Simplify<GlobalSectionsDocumentDataStepItemsItem>
-  >
-  /**
+  > /**
    * cta preheading field in *Global Sections*
    *
    * - **Field Type**: Title
@@ -196,8 +193,7 @@ interface GlobalSectionsDocumentData {
    * - **Tab**: Cta
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  ctaButtonLink: prismic.LinkField
-  /**
+  ctaButtonLink: prismic.LinkField /**
    * quote heading field in *Global Sections*
    *
    * - **Field Type**: Rich Text
@@ -280,8 +276,7 @@ interface ServiceDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ServiceDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<ServiceDocumentDataSlicesSlice> /**
    * Meta Description field in *Service*
    *
    * - **Field Type**: Text
@@ -361,6 +356,21 @@ export interface SettingsDocumentDataSocialItem {
 }
 
 /**
+ * Item in *Settings → images*
+ */
+export interface SettingsDocumentDataImagesItem {
+  /**
+   * image field in *Settings → images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.images[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -373,8 +383,7 @@ interface SettingsDocumentData {
    * - **Tab**: Header Menu
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice> /**
    * Slice Zone field in *Settings*
    *
    * - **Field Type**: Slice Zone
@@ -383,8 +392,7 @@ interface SettingsDocumentData {
    * - **Tab**: Footer Menu
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices1: prismic.SliceZone<SettingsDocumentDataSlices1Slice>
-  /**
+  slices1: prismic.SliceZone<SettingsDocumentDataSlices1Slice> /**
    * social field in *Settings*
    *
    * - **Field Type**: Group
@@ -393,7 +401,126 @@ interface SettingsDocumentData {
    * - **Tab**: Social
    * - **Documentation**: https://prismic.io/docs/field#group
    */;
-  social: prismic.GroupField<Simplify<SettingsDocumentDataSocialItem>>;
+  social: prismic.GroupField<Simplify<SettingsDocumentDataSocialItem>> /**
+   * logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */;
+  logo: prismic.ImageField<never>;
+
+  /**
+   * business name field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.businessName
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  businessName: prismic.KeyTextField;
+
+  /**
+   * business description field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.businessDescription
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  businessDescription: prismic.KeyTextField;
+
+  /**
+   * business telephone field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.businessTelephone
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  businessTelephone: prismic.KeyTextField;
+
+  /**
+   * business email field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.businessEmail
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  businessEmail: prismic.KeyTextField;
+
+  /**
+   * street address field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.streetAddress
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  streetAddress: prismic.KeyTextField;
+
+  /**
+   * address locality field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.addressLocality
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  addressLocality: prismic.KeyTextField;
+
+  /**
+   * address region field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.addressRegion
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  addressRegion: prismic.KeyTextField;
+
+  /**
+   * postalcode field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.postalCode
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  postalCode: prismic.KeyTextField;
+
+  /**
+   * address country field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.addressCountry
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  addressCountry: prismic.KeyTextField;
+
+  /**
+   * images field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.images[]
+   * - **Tab**: seo
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  images: prismic.GroupField<Simplify<SettingsDocumentDataImagesItem>>;
 }
 
 /**
@@ -1732,7 +1859,7 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 
@@ -1752,6 +1879,7 @@ declare module "@prismicio/client" {
       SettingsDocumentDataSlicesSlice,
       SettingsDocumentDataSlices1Slice,
       SettingsDocumentDataSocialItem,
+      SettingsDocumentDataImagesItem,
       AllDocumentTypes,
       AboutHeadingBodytextSlice,
       AboutHeadingBodytextSliceDefaultPrimary,
