@@ -1,62 +1,68 @@
 import { SliceZone } from '@prismicio/react'
-import { createClient } from "../prismicio";
-import { components } from "../slices";
+import { createClient } from "@/prismicio";
+import { components } from "@/slices";
 import RootLayout from '@/components/RootLayout';
-import { Metadata } from 'next';
+import { Metadata, NextPage, NextPageContext } from 'next';
+import { notFound, } from 'next/navigation';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { websiteConfig } from '@/config';
-import { LocalBusinessJsonLd, LogoJsonLd } from 'next-seo'
 import { isFilled } from '@prismicio/client';
+import Head from 'next/head';
+import { ButtonLink } from '@/components/ui/Button';
+import { config } from '@/unique';
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const homepage = await client.getByUID('flexiblePage', 'homepage',)
-  return {
-    title: homepage.data.meta_title || websiteConfig.defaultMetadata.title,
-    description: homepage.data.meta_description || websiteConfig.defaultMetadata.description,
+  const page = await client.getByUID('landingPage', config.uid)
 
+  return {
+    title: page.data.meta_title || 'Clickvisa',
+    description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+    // openGraph: {
+    //   type: 'website',
+    //   url: websiteConfig.siteUrl + page.uid,
+    //   title: page.data.meta_title || websiteConfig.defaultMetadata.title,
+    //   description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+    //   siteName: websiteConfig.siteName,
+    //   images: isFilled.image(page.data.meta_image) ? [page.data.meta_image.url] : undefined
+
+    // }
   }
 }
 
-export default async function Home() {
+export default async function Pages() {
   const client = createClient();
-  const page = await client.getByUID('flexiblePage', 'homepage', {
-    fetchLinks: ['service.name', 'service.featuredDescription', 'service.featuredIcon']
-  })
+
+  const page = await client.getByUID('landingPage', config.uid,).catch(() => notFound())
   const globalSections = await client.getSingle('globalSections')
   const settings = await client.getSingle('settings')
-  const { addressCountry, addressLocality, addressRegion, businessDescription, businessEmail, businessName, businessTelephone, images, logo, postalCode, streetAddress } = settings.data
-
-
   // console.log("page", page)
   return (
-    <RootLayout settings={settings} globalContext={globalSections}>
-      <LocalBusinessJsonLd
-        useAppDir={true}
-        type='LegalService'
-        address={{
-          streetAddress: isFilled.keyText(streetAddress) ? streetAddress : '',
-          addressLocality: isFilled.keyText(addressLocality) ? addressLocality : '',
-          addressRegion: isFilled.keyText(addressRegion) ? addressRegion : '',
-          postalCode: isFilled.keyText(postalCode) ? postalCode : '',
-          addressCountry: isFilled.keyText(addressCountry) ? addressCountry : '',
-        }}
-        id={websiteConfig.siteUrl}
-        description={isFilled.keyText(businessDescription) ? businessDescription : ''}
-        email={isFilled.keyText(businessEmail) ? businessEmail : ''}
-        telephone={isFilled.keyText(businessTelephone) ? businessTelephone : ''}
-        name={isFilled.keyText(businessName) ? businessName : websiteConfig.siteName}
-        images={isFilled.group(images) ? images.filter(item => isFilled.image(item.image) && item.image.url).map(item => item.image.url || '') : undefined}
-      // images={images}
-      />
-      <LogoJsonLd
-        logo={isFilled.image(logo) ? logo.url : ''}
-        url={websiteConfig.siteUrl}
-        useAppDir={true}
-      />
+    <RootLayout noFooter headerMenu={(
+      <ButtonLink href={'#contact'} variant={'fill'} size="sm" className="mx-2">
+        Contact Us
+      </ButtonLink>
+    )} settings={settings} globalContext={globalSections}>
+      <Head>
+
+      </Head>
       <SliceZone slices={page.data.slices} components={components} context={{
         globalSections: globalSections
       }} />
     </RootLayout>
 
   )
+}
+
+export async function generateStaticParams() {
+  const client = createClient()
+
+  const pages = await client.getAllByType('landingPage')
+
+  return pages.map(page => {
+    return {
+      pagePath: page.url?.split('/').filter(Boolean)
+    }
+  })
 }
