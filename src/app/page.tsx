@@ -13,54 +13,54 @@ import { config } from '@/unique';
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const client = createClient();
-  const page = await client.getByUID('landingPage', config.uid)
+    const client = createClient();
+    const page = await client.getByUID('landingPage', config.uid)
 
-  return {
-    title: page.data.meta_title || 'Clickvisa',
-    description: page.data.meta_description || websiteConfig.defaultMetadata.description,
-    // openGraph: {
-    //   type: 'website',
-    //   url: websiteConfig.siteUrl + page.uid,
-    //   title: page.data.meta_title || websiteConfig.defaultMetadata.title,
-    //   description: page.data.meta_description || websiteConfig.defaultMetadata.description,
-    //   siteName: websiteConfig.siteName,
-    //   images: isFilled.image(page.data.meta_image) ? [page.data.meta_image.url] : undefined
+    return {
+        title: page.data.meta_title || 'Clickvisa',
+        description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+        // openGraph: {
+        //   type: 'website',
+        //   url: websiteConfig.siteUrl + page.uid,
+        //   title: page.data.meta_title || websiteConfig.defaultMetadata.title,
+        //   description: page.data.meta_description || websiteConfig.defaultMetadata.description,
+        //   siteName: websiteConfig.siteName,
+        //   images: isFilled.image(page.data.meta_image) ? [page.data.meta_image.url] : undefined
 
-    // }
-  }
+        // }
+    }
 }
 
 export default async function Pages() {
-  const client = createClient();
+    const client = createClient();
 
-  const page = await client.getByUID('landingPage', config.uid,).catch(() => notFound())
-  const globalSections = await client.getSingle('globalSections')
-  const settings = await client.getSingle('settings')
-  // console.log("page", page)
-  return (
-    <RootLayout noFooter headerMenu={(
-      <ButtonLink href={'#contact'} variant={'fill'} size="sm" className="mx-2">
-        Contact Us
-      </ButtonLink>
-    )} settings={settings} globalContext={globalSections}>
+    const page = await client.getByUID('landingPage', config.uid,).catch(() => notFound())
+    const globalSections = await client.getSingle('globalSections')
+    const settings = await client.getSingle('settings')
+    // console.log("page", page)
+    return (
+        <RootLayout noFooter headerMenu={(
+            <ButtonLink href={'#contact'} variant={'fill'} size="sm" className="mx-2">
+                Contact Us
+            </ButtonLink>
+        )} settings={settings} globalContext={globalSections}>
 
-      <SliceZone slices={page.data.slices} components={components} context={{
-        globalSections: globalSections
-      }} />
-    </RootLayout>
+            <SliceZone slices={page.data.slices} components={components} context={{
+                globalSections: globalSections
+            }} />
+        </RootLayout>
 
-  )
+    )
 }
 
 export async function generateStaticParams() {
-  const client = createClient()
+    const client = createClient()
 
-  const pages = await client.getAllByType('landingPage')
+    const pages = await client.getAllByType('landingPage')
 
-  return pages.map(page => {
-    return {
-      pagePath: page.url?.split('/').filter(Boolean)
-    }
-  })
+    return pages.map(page => {
+        return {
+            pagePath: page.url?.split('/').filter(Boolean)
+        }
+    })
 }

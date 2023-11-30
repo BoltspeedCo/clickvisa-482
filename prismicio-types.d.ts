@@ -1098,6 +1098,16 @@ export interface ContactInfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   formHeading: prismic.RichTextField;
+
+  /**
+   * formspark ID field in *ContactInfo → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_info.primary.formsparkId
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  formsparkId: prismic.KeyTextField;
 }
 
 /**
@@ -1283,6 +1293,16 @@ export interface CtaContactSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   bodyText: prismic.RichTextField;
+
+  /**
+   * formspark ID field in *CtaContact → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_contact.primary.formsparkId
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  formsparkId: prismic.KeyTextField;
 }
 
 /**
@@ -1550,6 +1570,16 @@ export interface FeaturedServicesSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   service: prismic.ContentRelationshipField<"service">;
+
+  /**
+   * button link field in *FeaturedServices → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_services.items[].buttonLink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttonLink: prismic.LinkField;
 }
 
 /**
@@ -1665,6 +1695,16 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * video field in *Hero → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.video
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  video: prismic.LinkField;
 }
 
 /**
@@ -2485,6 +2525,16 @@ export interface TeamPartnersSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   phone: prismic.KeyTextField;
+
+  /**
+   * license field in *TeamPartners → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_partners.items[].license
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  license: prismic.KeyTextField;
 }
 
 /**
